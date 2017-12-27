@@ -1,0 +1,148 @@
+*{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	color:#6c6c6c;
+}
+ul{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+	color:#333;
+}
+.container{
+	width:100%;
+	background:#f5f5f5;
+}
+.top{
+	overflow:hidden;
+	height:1%;
+	width:1190px;
+	margin:0 auto;
+}
+.top_left,.top_right{
+	float:left;
+}
+.top_left{
+	width:520px;
+}
+.top_left ul li{
+	float:left;
+	padding-right:10px;
+}
+.top_left ul li a{
+	height:35px;
+	line-height:35px;
+	font-size:13px;
+}
+.top_left ul li span img{
+	vertical-align: middle;
+}
+.img01{
+	display:inline-block;
+	width:80px;
+	background:url(../img/43.png) no-repeat right center;
+}
+.top_right{
+	width:670px;
+}
+.top_right ul li{
+	float:left;
+	padding-right:8px;
+}
+.top_right ul li a{
+	height:35px;
+	line-height:35px;
+	font-size:13px;
+}
+.top_right ul li span img{
+	vertical-align: middle;
+}
+.img02{
+	text-align:right;
+	display:inline-block;
+	width:60px;
+	background:url(../img/45.png) no-repeat left center;
+}
+.img03{
+	text-align:right;
+	display:inline-block;
+	width:60px;
+	background:url(../img/46.png) no-repeat left center;
+}
+.img04{
+	text-align:right;
+	display:inline-block;
+	width:70px;
+	background:url(../img/47.png) no-repeat left 8px;
+}
+.nav{
+	width:100%;
+	overflow: hidden;
+	height:1%;
+}
+.bottom{
+	width:1190px;
+	margin:0 auto;
+	overflow: hidden;
+	height:1%;
+}
+.bottom_left{
+	width:1190px;
+}
+.bottom_left ul li{
+	float:left;
+	line-height:60px;
+	height:60px;
+	padding-right:50px;
+}
+.bottom_left ul li span{
+	font-size:18px;
+	font-weight: bold;
+	
+}
+.bottom_left ul li img{
+	vertical-align: middle;
+	
+}
+.logo{
+	padding-right:5px;
+}
+
+.mmenu{
+	width:1190px;
+	margin:0 auto;
+	overflow: hidden;
+	height:1%;
+	
+	padding-top:20px;
+}
+.menu_middle{
+	overflow: hidden;
+	height:1%;
+	margin:0 auto;
+	width:300px;
+	text-align: center;
+	
+}
+.menu_middle ul li{
+	float:left;
+	width:200px;
+	font-size:20px;
+	font-weight: bold;
+	padding-bottom:12px;
+}
+
+.login{
+	margin:0 auto;
+	width:400px;
+	padding-top:50px;
+}
+.login table tr td{
+	padding-bottom:10px;
+	width:100px;
+}
+.juzhong{
+	text-align: center;
+}

@@ -1,0 +1,414 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+
+	<div id="main_e" style="width: auto;height: 100%"></div>
+
+	<script>	
+	var myChart = echarts.init(document.getElementById('main_e'));	
+myChart.showLoading();
+$.getJSON('../erg?flag=regionInfo', function(data){
+myChart.hideLoading();
+	var infoData = data.sort(function (a, b) {//数据排序取前五个
+                return b.value - a.value;
+            });
+			var convertData = function (infoData) {
+    var res = [];
+    for (var i = 0; i < infoData.length; i++) {
+		
+        var geoCoord = [infoData[i].lng,infoData[i].lat];
+        if (geoCoord) {
+            res.push({
+                name: infoData[i].city,
+                value: geoCoord.concat(infoData[i].value)
+            });
+        }
+    }
+    return res;
+};
+var convertData2 = function (infoData) {
+    var res = [];
+   // console.log(infoData.length);
+    for (var i = 0; i < infoData.length; i+=10) {
+        var dataItem = infoData[i];
+        var fromCoord = [dataItem.lng,dataItem.lat];
+        for(var j = i; j < infoData.length; j+=100){
+	        var toCoord =  [infoData[j].lng,infoData[j].lat];
+	        if (fromCoord && toCoord) {
+	            res.push({
+	                fromName: dataItem.city,
+	                toName: infoData[j].city,
+	                coords: [fromCoord, toCoord]
+	            });
+	        }
+        }
+        
+    }
+    return res;
+};
+        
+var convertData3 = function (infoData) {//西安出发取随机地点
+    var res = [];
+   // console.log(infoData.length);
+        
+    for (var i = 0; i < infoData.length; i+=10) {
+        var fromCoord = [108.95,34.26];
+	        var toCoord =  [infoData[i].lng,infoData[i].lat];
+	        if (fromCoord && toCoord&&toCoord!==fromCoord) {
+	            res.push({
+	                fromName: "西安市",
+	                toName: infoData[i].city,
+	                coords: [fromCoord,toCoord]
+	            });
+	    
+        }
+        
+    }
+    return res;
+};
+//console.log(infoData[0])
+console.log(convertData3(infoData));
+function renderItem(params, api) {
+    var coords = [
+        [116.7,39.53],
+        [103.73,36.03],
+        [112.91,27.87],
+        [120.65,28.01],
+        [119.57,39.95]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+var color = ['#a6c84c', '#ffa022', '#46bee9'];
+option = {
+    backgroundColor: '#404a59',
+    title: {
+        text: '会员注册地分布',
+        left: 'center',
+        textStyle: {
+            color: '#fff'
+        }
+    },
+	toolbox: { //可视化的工具箱
+                show: true,
+                feature: {
+                    dataView: { //数据视图
+                        show: true
+                    },
+                    restore: { //重置
+                        show: true
+                    },
+                    saveAsImage: {//保存图片
+                        show: true
+                    },
+                  
+                }
+            },
+    tooltip : {
+        trigger: 'item'
+    },
+	
+    bmap: {
+        center: [104.114129, 37.550339],
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+            styleJson: [
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#044161"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#064f85"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#005b96",
+                            "lightness": 1
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#00508b"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#056197",
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#029fd4"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#1a5787"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    }
+            ]
+        }
+    },
+     legend: {
+        orient: 'vertical',
+        top: 'top',
+        left: 'left',
+        data:['用户量分布','航线图'],
+        textStyle: {
+            color: '#fff'
+        },
+        selectedMode: 'single'
+    },
+    series :[
+    {
+            name: '用户量分布',
+            type: 'scatter',
+            dimensions: ['经度', '维度', '用户数'],//hover时显示的标签信息
+            coordinateSystem: 'bmap',
+            data: convertData(infoData.slice(5)),
+            symbolSize: function (val) {
+                return val[2] / 10;
+            },
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color:'#ddb926' //'rgb(42,42,42)'//'#CCCCCC'
+                }
+            },
+            z: 5
+        },
+        {
+            name: 'Top 5',
+            
+            type: 'effectScatter',
+            coordinateSystem: 'bmap',
+			dimensions: ['经度', '维度', '用户数'],//hover时显示的标签信息
+			
+            data: convertData(data.slice(0, 5)),
+            symbol:'triangle',//'circle'圆形, 'rect'矩形, 'roundRect'带圆角的矩形, 'triangle'三角形, 'diamond'菱形, 'pin'大头针, 'arrow' 箭头//也可以通过 'image://url' 设置为图片，其中 url 为图片的链接，或者 dataURI。可以通过 'path://' 将图标设置为任意的矢量路径
+			symbolSize: function (val) {//图形大小
+                return val[2] / 10;
+            },
+			symbolRotate:90,//标记旋转角度
+            showEffectOn: 'render',//render  绘制完成后显示特效。//emphasis 高亮（hover）的时候显示特效
+            //symbolOffset:[0, '50%'] ,//位置相对偏移
+			rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+			label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#f4e925',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            //zlevel: 9//分层
+            z:99
+        },
+        {//区域显示
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItem,
+            itemStyle: {
+                normal: {
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: 1
+        },{
+        name: '航线图',
+        type: 'lines',
+        zlevel: 2,
+        coordinateSystem: 'bmap',
+        symbol: ['none', 'arrow'],
+        symbolSize: 10,
+        effect: {
+            show: true,
+            period: 6,
+            trailLength: 0,
+            symbol: planePath,
+            symbolSize: 15
+        },
+        lineStyle: {
+            normal: {
+                color: color[1],
+                width: 1,
+                opacity: 0.6,
+                curveness: 0.2
+            }
+        },
+        data: convertData3(infoData)
+    },
+    {	
+    	name:'航线图',
+        type: 'lines',
+        coordinateSystem: 'bmap',
+        effect: {
+            show: true,
+            period: 6,
+            trailLength: 0.7,
+            color: '#fff',
+            symbolSize: 3
+        },
+        lineStyle: {
+            normal: {
+                color: '#50A4C4',
+                width: 1,
+                curveness: 0.2
+            }
+        },
+        data: convertData3(infoData)
+    }
+    ]
+};
+			myChart.setOption(option);
+			
+			});
+		
+
+	
+	
+
+	</script>
+</body>
+</html>

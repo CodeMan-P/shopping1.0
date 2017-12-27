@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>词云</title>
+</head>
+<body>
+ <!-- 为ECharts准备一个具备大小（宽高）的Dom <script src="../../echarts-master/dist/echarts.js"></script>-->
+ <div id="main" style="width: 100%;height:600px;"></div>
+	<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+ <script src="../../js/echarts.js"></script>
+	<script src="../../js/worldcloud.js"></script>
+
+ <script type="text/javascript"> 
+ var myChart = echarts.init(document.getElementById('main'));
+	var dataBJ = [
+    [1,55,9,56,0.46,18,6,"良"],
+    [2,25,11,21,0.65,34,9,"优"],
+    [3,56,7,63,0.3,14,5,"良"],
+    [4,33,7,29,0.33,16,6,"优"],
+    [5,42,24,44,0.76,40,16,"优"],
+    [6,82,58,90,1.77,68,33,"良"],
+    [7,74,49,77,1.46,48,27,"良"],
+    [8,78,55,80,1.29,59,29,"良"],
+    [9,267,216,280,4.8,108,64,"重度污染"],
+    [10,185,127,216,2.52,61,27,"中度污染"],
+    [11,39,19,38,0.57,31,15,"优"],
+    [12,41,11,40,0.43,21,7,"优"],
+    [13,64,38,74,1.04,46,22,"良"],
+    [14,108,79,120,1.7,75,41,"轻度污染"],
+    [15,108,63,116,1.48,44,26,"轻度污染"],
+    [16,33,6,29,0.34,13,5,"优"],
+    [17,94,66,110,1.54,62,31,"良"],
+    [18,186,142,192,3.88,93,79,"中度污染"],
+    [19,57,31,54,0.96,32,14,"良"],
+    [20,22,8,17,0.48,23,10,"优"],
+    [21,39,15,36,0.61,29,13,"优"],
+    [22,94,69,114,2.08,73,39,"良"],
+    [23,99,73,110,2.43,76,48,"良"],
+    [24,31,12,30,0.5,32,16,"优"],
+    [25,42,27,43,1,53,22,"优"],
+    [26,154,117,157,3.05,92,58,"中度污染"],
+    [27,234,185,230,4.09,123,69,"重度污染"],
+    [28,160,120,186,2.77,91,50,"中度污染"],
+    [29,134,96,165,2.76,83,41,"轻度污染"],
+    [30,52,24,60,1.03,50,21,"良"],
+    [31,46,5,49,0.28,10,6,"优"]
+];
+
+	 
+					
+	var rdata=[
+      {name: '北京',value: randomData(),itemStyle: {
+                    normal: {
+                        color: 'red'
+                    }
+                }},
+      {name: '天津',value: randomData(),textStyle: createRandomItemStyle() },
+      {name: '上海',value: randomData(),textStyle: createRandomItemStyle() },
+      {name: '重庆',value: randomData(),textStyle: createRandomItemStyle() },
+      {name: '河北',value: randomData(),itemStyle: createRandomItemStyle() },
+      {name: '河南',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '云南',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '辽宁',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '黑龙江',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '湖南',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '安徽',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '山东',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '新疆',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '江苏',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '浙江',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '江西',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '湖北',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '广西',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '甘肃',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '山西',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '内蒙古',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '陕西',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '吉林',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '福建',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '贵州',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '广东',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '青海',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '西藏',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '四川',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '宁夏',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '海南',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '台湾',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '香港',value: randomData() ,itemStyle: createRandomItemStyle()},
+      {name: '澳门',value: randomData() ,itemStyle: createRandomItemStyle()}
+     ];
+ var dataCloud = {  
+        "cloudData":  
+            [  
+                {"name":"澎湃","value":"25"},  
+                {"name":" 暴晒","value":" 14"},  
+                {"name":" 套件","value":"13"},  
+                {"name":" 有","value":" 24"},  
+                {"name":" 驾驶","value":" 30"},  
+                {"name":" 满满","value":" 1"},  
+                {"name":" 行驶","value":" 2"},  
+                {"name":" 强烈","value":"3"},  
+                {"name":" 轻盈","value":"8"},  
+                {"name":" 沉稳","value":"5"},  
+                {"name":" 1800公里","value":" 1"},  
+                {"name":" 低","value":" 2"},  
+                {"name":" 双","value":" 18"},  
+                {"name":" 前后","value":" 18"},  
+                {"name":" 跑车","value":" 1"},  
+                {"name":" 互联","value":" 22"},  
+                {"name":" 哪","value":" 23"},  
+                {"name":" 说","value":" 31"},  
+                {"name":" 全面","value":" 15"},  
+                {"name":" 搞定","value":" 12"}  
+            ],  
+        "cloudDiv":"worldDiv"  
+    };  
+	 function randomData() {
+   return Math.round(Math.random()*1000);
+  }
+	 var createRandomItemStyle2 = function () {  
+    var colorArr = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];  
+    var flag = parseInt(Math.random() * 10);  
+    return {  
+        normal: {  
+            fontFamily: '微软雅黑',  
+            color:colorArr[flag]  
+        }  
+    };  
+};
+var option = {  
+            tooltip : {},  
+            series : [ {  
+				 name: 'Google Trends',
+        type: 'wordCloud',
+        size: ['80%', '80%'],
+        textRotation : [0, 45, 90, -45],
+        textPadding: 0,
+        autoSize: {
+            enable: true,
+            minSize: 14
+        },
+               textStyle:createRandomItemStyle2(),
+                data : rdata//dataCloud.cloudData 
+            } ]  
+        };  
+   
+	 function createRandomItemStyle() {
+		 var a = Math.round(Math.random() * 250);
+				var b = Math.round(Math.random() * 250);
+				var c = Math.round(Math.random() * 250);
+							
+    return {
+        normal: {
+            color: "rgb(" + a + "," + b + "," + c + ")"
+        }
+    };
+}
+option = {
+    title: {
+        text: 'Google Trends',
+        link: 'http://www.google.com/trends/hottrends'
+    },
+    tooltip: {
+        show: true
+    },
+    series: [{
+        name: 'Google Trends',
+        type: 'wordCloud',
+        size: ['80%', '80%'],
+        textRotation : [0, 45, 90, -45],
+        textPadding: 0,
+        autoSize: {
+            enable: true,
+            minSize: 14
+        },textStyle : {  
+                    normal : {  
+                        color : function() {  
+                            return 'rgb('  
+                                    + [ Math.round(Math.random() * 160),  
+                                            Math.round(Math.random() * 160),  
+                                            Math.round(Math.random() * 160) ]  
+                                            .join(',') + ')';  
+                        }  
+                    }},  
+		itemStyle: {
+                    normal: {
+                        color:function() {  
+                            return 'rgb('  
+                                    + [ Math.round(Math.random() * 160),  
+                                            Math.round(Math.random() * 160),  
+                                            Math.round(Math.random() * 160) ]  
+                                            .join(',') + ')';  
+                        }
+                    }
+                },
+        data:[
+            {
+                name: "Sam S Club",
+                value: 10000,
+                textStyle: {
+                    normal: {
+                        color: 'black'
+                    }
+                }
+            },
+            {
+                name: "Macys",
+                value: 6181,
+                textStyle: createRandomItemStyle()
+            },
+            {
+                name: "Amy Schumer",
+                value: 4386,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Jurassic World",
+                value: 4055,
+                textStyle: createRandomItemStyle()
+            },
+            {
+                name: "Charter Communications",
+                value: 2467,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Chick Fil A",
+                value: 2244,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Planet Fitness",
+                value: 1898,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Pitch Perfect",
+                value: 1484,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Express",
+                value: 1112,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Home",
+                value: 965,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Johnny Depp",
+                value: 847,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Lena Dunham",
+                value: 582,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Lewis Hamilton",
+                value: 555,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "KXAN",
+                value: 550,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Mary Ellen Mark",
+                value: 462,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Farrah Abraham",
+                value: 366,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Rita Ora",
+                value: 360,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Serena Williams",
+                value: 282,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "NCAA baseball tournament",
+                value: 273,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Point Break",
+                value: 265,
+                itemStyle: createRandomItemStyle()
+            }
+        ]
+    }]
+};   
+ myChart.setOption(option);
+ </script> 
+  
+</body>
+</html>

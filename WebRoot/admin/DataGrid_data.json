@@ -1,0 +1,35 @@
+[{
+	"id": 1,
+	"text": "My Documents",
+	"children": [{
+		"id": 11,
+		"text": "DataGrid",
+		"children": [
+		{
+			"id": 111,
+			"text": "users"
+		},
+		{
+			"id": 112,
+			"text": "goods"
+		},{
+			"id": 113,
+			"text": "address"
+		},{
+			"id": 114,
+			"text": "goodstype"
+		},{
+			"id": 115,
+			"text": "orderform"
+		},{
+			"id": 116,
+			"text": "orders"
+		},{
+			"id": 117,
+			"text": "qrcheck"
+		},{
+			"id": 118,
+			"text": "shoppingcar"
+		}]
+	}]
+}]

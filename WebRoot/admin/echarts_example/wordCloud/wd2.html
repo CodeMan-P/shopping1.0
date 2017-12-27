@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>词云</title>
+</head>
+<body>
+ <!-- 为ECharts准备一个具备大小（宽高）的Dom <script src="../../echarts-master/dist/echarts.js"></script>-->
+ <div id="main" style="width: 100%;height:600px;"></div>
+	<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+ <script src="../../js/echarts.js"></script>
+	<script src="../../echarts-master/theme/shine.js"></script>
+ <script src="../../echarts-master/map/js/china.js"></script>
+	<script src="../../js/worldcloud.js"></script>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="head"></div>
+
+
+    <div class="container-fluid">
+        <div class="row-fluid example">
+            <div id="sidebar-code" class="col-md-4">
+                <div class="well sidebar-nav">
+                    <div class="nav-header"><a href="#" onclick="autoResize()" class="glyphicon glyphicon-resize-full" id ="icon-resize" ></a>option</div>
+                    <textarea id="code" name="code">
+
+
+                    </textarea>
+              </div><!--/.well -->
+            </div><!--/span-->
+            <div id="graphic" class="col-md-8">
+                <div id="main" class="main"></div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-success" onclick="refresh(true)">刷 新</button>
+                    <span class="text-primary">切换主题</span>
+                    <select id="theme-select"></select>
+
+                    <span id='wrong-message' style="color:red"></span>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+        
+        </div><!--/.fluid-container-->
+
+    <footer id="footer"></footer>
+ <script type="text/javascript"> 
+ var myChart = echarts.init(document.getElementById('main'));
+
+  function createRandomItemStyle() {
+    return {
+        normal: {
+            color: 'rgb(' + [
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160),
+                Math.round(Math.random() * 160)
+            ].join(',') + ')'
+        }
+    };
+}
+
+option = {
+    title: {
+        text: 'Google Trends',
+        link: 'http://www.google.com/trends/hottrends'
+    },
+    tooltip: {
+        show: true
+    },
+    series: [{
+        name: 'Google Trends',
+        type: 'wordCloud',
+        size: ['80%', '80%'],
+        textRotation : [0, 45, 90, -45],
+        textPadding: 0,
+        autoSize: {
+            enable: true,
+            minSize: 14
+        },
+        data: [
+            {
+                name: "Sam S Club",
+                value: 10000,
+                itemStyle: {
+                    normal: {
+                        color: 'black'
+                    }
+                }
+            },
+            {
+                name: "Macys",
+                value: 6181,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Amy Schumer",
+                value: 4386,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Jurassic World",
+                value: 4055,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Charter Communications",
+                value: 2467,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Chick Fil A",
+                value: 2244,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Planet Fitness",
+                value: 1898,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Pitch Perfect",
+                value: 1484,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Express",
+                value: 1112,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Home",
+                value: 965,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Johnny Depp",
+                value: 847,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Lena Dunham",
+                value: 582,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Lewis Hamilton",
+                value: 555,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "KXAN",
+                value: 550,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Mary Ellen Mark",
+                value: 462,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Farrah Abraham",
+                value: 366,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Rita Ora",
+                value: 360,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Serena Williams",
+                value: 282,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "NCAA baseball tournament",
+                value: 273,
+                itemStyle: createRandomItemStyle()
+            },
+            {
+                name: "Point Break",
+                value: 265,
+                itemStyle: createRandomItemStyle()
+            }
+        ]
+    }]
+};
+ myChart.setOption(option);
+ </script> 
+  <div id = "worldDiv" style="width:80%;height:350px;margin:80px auto;background-color: #ccc;border:2px solid #ccc"></div>  
+<script>
+	    var dataCloud = {  
+        "cloudData":  
+            [  
+                {"name":"澎湃","value":"25"},  
+                {"name":" 暴晒","value":" 14"},  
+                {"name":" 套件","value":"13"},  
+                {"name":" 有","value":" 24"},  
+                {"name":" 驾驶","value":" 30"},  
+                {"name":" 满满","value":" 1"},  
+                {"name":" 行驶","value":" 2"},  
+                {"name":" 强烈","value":"3"},  
+                {"name":" 轻盈","value":"8"},  
+                {"name":" 沉稳","value":"5"},  
+                {"name":" 1800公里","value":" 1"},  
+                {"name":" 低","value":" 2"},  
+                {"name":" 双","value":" 18"},  
+                {"name":" 前后","value":" 18"},  
+                {"name":" 跑车","value":" 1"},  
+                {"name":" 互联","value":" 22"},  
+                {"name":" 哪","value":" 23"},  
+                {"name":" 说","value":" 31"},  
+                {"name":" 全面","value":" 15"},  
+                {"name":" 搞定","value":" 12"}  
+            ],  
+        "cloudDiv":"worldDiv"  
+    };  
+      
+    var createRandomItemStyle1 = function (params) {　　　　//此方法与下方配置中的第一个textStle下的color等同  
+        var colors = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];  
+        return colors[parseInt(Math.random() * 10)];  
+    }  
+      
+    var createRandomItemStyle2 = function () {  
+        var colorArr = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];  
+        var flag = parseInt(Math.random() * 10);  
+        return {  
+            normal: {  
+                fontFamily: '微软雅黑',  
+                color:colorArr[flag]  
+            }  
+        };  
+    }  
+    function _setWordCloud (cloudData) {  
+        var option = {  
+            series: [  
+                {  
+                    type: 'wordCloud',  
+                    shape: 'ellipse',  
+                    gridSize: 8,  
+                    textStyle: {  
+                        normal: {  
+                            fontFamily: '微软雅黑',  
+                            color: function () {  
+                                var colors = ['#fda67e', '#81cacc', '#cca8ba', "#88cc81", "#82a0c5", '#fddb7e', '#735ba1', '#bda29a', '#6e7074', '#546570', '#c4ccd3'];  
+                                return colors[parseInt(Math.random() * 10)];  
+                            }  
+                        }  
+                    },  
+      
+                    /*注释一：*/  
+                     textStyle:createRandomItemStyle2(),  
+      
+      
+                    /*注释二：*/  
+                    /*textStyle: { 
+                    normal: { 
+                            fontFamily: '微软雅黑', 
+                            color: createRandomItemStyle1() 
+                        } 
+                    },*/  
+                    data: cloudData  
+                }  
+            ]  
+        };  
+        return option;  
+    };  
+      
+    //词云图初始化  
+    function initWordCloud(wordCloudData) {  
+        var option = _setWordCloud(wordCloudData.cloudData);  
+        var myChart = echarts.init(document.getElementById(wordCloudData.cloudDiv));  
+        myChart.setOption(option);  
+    }  
+      
+    initWordCloud(dataCloud);  
+	</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+	
+	<div id="main_age" style="width: 100%;height:600px;"></div>
+	<script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
+ <script src="../../echarts-master/dist/echarts.js"></script>
+	<script src="../../echarts-master/theme/shine.js"></script>
+ <script src="../../echarts-master/map/js/china.js"></script>
+ 
+<script type="text/javascript"> 
+	var myChart = echarts.init(document.getElementById('main_age'));
+
+ 
+
+	 var ageInfo =  [ {
+  "ageStep" : "11-20",
+  "value" : 863,
+  "sex" : "女"
+}, {
+  "ageStep" : "11-20",
+  "value" : 847,
+  "sex" : "男"
+}, {
+  "ageStep" : "21-30",
+  "value" : 1471,
+  "sex" : "女"
+}, {
+  "ageStep" : "21-30",
+  "value" : 1400,
+  "sex" : "男"
+}, {
+  "ageStep" : "31-40",
+  "value" : 1507,
+  "sex" : "女"
+}, {
+  "ageStep" : "31-40",
+  "value" : 1342,
+  "sex" : "男"
+}, {
+  "ageStep" : "41-50",
+  "value" : 1416,
+  "sex" : "女"
+}, {
+  "ageStep" : "41-50",
+  "value" : 1382,
+  "sex" : "男"
+}, {
+  "ageStep" : "51-60",
+  "value" : 1378,
+  "sex" : "女"
+}, {
+  "ageStep" : "51-60",
+  "value" : 1411,
+  "sex" : "男"
+} ];
+	var center=['75%', '25%'];
+                var radius= '28%';
+	 function getAgeStep(){
+		 var res = [];
+		 for(var i = 0;i<ageInfo.length;i++){
+			 if(ageInfo[i].sex ==="男"){
+				 	res.push(ageInfo[i].ageStep);
+				}
+		 }
+		 return res;
+	 }
+	 function getAgeInfo(sex){
+		 var res = [];
+		 for(var i = 0;i<ageInfo.length;i++){
+			 if(ageInfo[i].sex ===sex){
+			res.push(ageInfo[i].value);	
+				}
+		 }
+		 return res;
+	 }
+	 console.log(getAgeStep())
+	 console.log(getAgeInfo("男"))
+	 
+	 option = {
+    title : {
+        text: '用户年龄段分布',
+        subtext: '纯属虚构'
+    },
+    tooltip : {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['男','女','pl男','pl女'],
+		selectedMode: 'multiple'
+    },
+    toolbox: {
+        show : true,
+        feature : {
+            dataView : {show: true, readOnly: false},
+            magicType : {show: true, type: ['line', 'bar','polar']},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    calculable : true,
+    xAxis : [
+        {
+            type : 'category',
+            data : getAgeStep()
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+			max:2500,
+        }
+    ],
+		 angleAxis: {
+        type: 'category',
+        data: getAgeStep(),
+			 center: center,
+                radius: radius,
+        z: 999
+    },
+    radiusAxis: {
+    },polar: {
+		center: center,
+                radius: radius,
+		z: 999
+    },
+    series : [{
+		name:'pl男',
+        type: 'bar',
+        data: getAgeInfo("男"),
+        coordinateSystem: 'polar',
+		center: center,
+		radius: radius,
+		z: 999
+    },{
+		name:'pl女',
+        type: 'bar',
+        data: getAgeInfo("女"),
+        coordinateSystem: 'polar',
+		center: center,
+		radius: radius,
+		z: 999
+    },{
+            name:'男',
+            type:'bar',
+            data:getAgeInfo("男"),
+            markPoint : {
+                data : [
+                    {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name: '平均值'}
+                ]
+            }
+        },
+        {
+            name:'女',
+            type:'bar',
+            data:getAgeInfo("女"),
+            markPoint : {
+                data : [
+                     {type : 'max', name: '最大值'},
+                    {type : 'min', name: '最小值'}
+                ]
+            },
+            markLine : {
+                data : [
+                    {type : 'average', name : '平均值'}
+                ]
+            }
+        }
+    ]
+};
+
+    myChart.setOption(option);
+//	$.getJSON('./erg?flag=ageInfo', function (data) {
+//});
+
+
+ </script> 
+  
+	
+</body>
+</html>

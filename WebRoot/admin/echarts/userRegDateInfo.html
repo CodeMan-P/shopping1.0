@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+</head>
+<body>
+ <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+ <div id="main_regDate" style="width: 100%;height:100%;"></div>
+ <script type="text/javascript"> 
+ var myChart = echarts.init(document.getElementById('main_regDate'));
+	 var searchStr = yearFlag;//.param('flag');
+console.log(searchStr);
+searchStr = searchStr.substr(1);//去除?//将searchStr字符串分割成数组，数组中的每一个元素为一个参数和参数值
+var searchs = searchStr.split("&");//获得第一个参数和值
+var flag = searchs[0].split("=");
+flag = flag[1];
+console.log(searchStr);
+console.log(flag);
+$.getJSON('../erg?flag=dateInfo', function (data) {
+	var dataInfo = data;
+	//console.log(dataInfo);
+	function getCalendar(){
+	var res = [];
+	var year = 2017;
+	var index = -140;
+	for(var i = 2017;i>2016;i--){
+	index+=240;
+	res.push({
+	top: index,
+        left: 'center',
+        range: [i+'-01-01', i+'-06-30'],
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#000',
+                width: 4,
+                type: 'solid'
+            }
+        },
+        yearLabel: {
+            formatter: '{start}  1st',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: '#323c48',
+                borderWidth: 1,
+                borderColor: '#111'
+            }
+        }
+	});
+	index+=240;
+	res.push({
+	top: index,
+        left: 'center',
+        range: [i+'-07-01', i+'-12-31'],
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#000',
+                width: 4,
+                type: 'solid'
+            }
+        },
+        yearLabel: {
+            formatter: '{start}  2nd',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: '#323c48',
+                borderWidth: 1,
+                borderColor: '#111'
+            }
+        }
+	});
+	}
+	return res;
+	}
+	 function getArrayData() {
+    var data = [];
+    for (var i=0;i<dataInfo.length;i++) {
+        data.push([
+            dataInfo[i].regDate,
+			//echarts.format.formatTime('yyyy-MM-dd', time),
+            dataInfo[i].value,
+        ]);
+    }
+    return data;
+}
+	var datas = getArrayData();
+	var size = 3.5;//标记大小系数
+	//console.log(datas);
+option = {
+    backgroundColor: '#404a59',
+
+    title: {
+        top: 30,
+        text: '2017年注册日期分布',
+        subtext: '数据纯属虚构',
+        left: 'center',
+        textStyle: {
+            color: '#fff'
+        }
+    },
+    tooltip : {
+        trigger: 'item'
+    },
+    legend: {
+        top: '30',
+        left: '100',
+        data:['人数', 'Top 12'],
+        textStyle: {
+            color: '#fff'
+        }
+    },
+    calendar: getCalendar(),
+    series : [
+        {
+            name: '人数',
+            type: 'scatter',
+            coordinateSystem: 'calendar',
+            dimensions: ['日期',  '注册用户数'],
+            data: datas,
+            symbolSize: function (val) {
+                return val[1] *size;
+            },
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            }
+        },
+        {
+            name: '人数',
+            type: 'scatter',
+            dimensions: ['日期',  '注册用户数'],
+            coordinateSystem: 'calendar',
+            calendarIndex: 1,
+            data: datas,
+            symbolSize: function (val) {
+                return val[1] *size;
+            },
+            itemStyle: {
+                normal: {
+                    color: '#ddb926'
+                }
+            }
+        },
+        {
+            name: 'Top 12',
+            type: 'effectScatter',
+            coordinateSystem: 'calendar',
+            dimensions: ['日期',  '注册用户数'],
+            calendarIndex: 1,
+            data: datas.sort(function (a, b) {
+                return b[1] - a[1];
+            }).slice(0, 12),
+            symbolSize: function (val) {
+                return val[1] *size;
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            itemStyle: {
+                normal: {
+                    color: '#f4e925',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1
+        },
+        {
+            name: 'Top 12',
+            type: 'effectScatter',
+            coordinateSystem: 'calendar',
+            dimensions: ['日期',  '注册用户数'],
+            data: datas.sort(function (a, b) {
+                return b[1] - a[1];
+            }).slice(0, 12),
+            symbolSize: function (val) {
+                return val[1] *size;
+            },
+            showEffectOn: 'render',
+            rippleEffect: {
+                brushType: 'stroke'
+            },
+            hoverAnimation: true,
+            itemStyle: {
+                normal: {
+                    color: '#f4e925',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1
+        }
+    ]
+};
+
+ myChart.setOption(option);
+});
+	 
+ </script> 
+  
+</body>
+</html>

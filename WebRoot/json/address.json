@@ -1,0 +1,20 @@
+{
+  "code": 0,
+  "message": "OK",
+  "data": [
+    {
+      "id": 1,
+      "default": true,
+      "name": "张三",
+      "phone": "13566792289",
+      "address": "陕西省西安市高新区西安外包学院"
+    },
+    {
+      "id": 2,
+      "default": false,
+      "name": "李四",
+      "phone": "18829788888",
+      "address": "陕西省西安市高新区西安外包学院"
+    }
+  ]
+}

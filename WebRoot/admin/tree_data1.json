@@ -1,0 +1,74 @@
+[{
+	"id": 1,
+	"text": "My Documents",
+	"children": [{
+		"id": 11,
+		"text": "DataGrid",
+		
+		"children": [{
+			"id": 111,
+			"state": "closed",
+			"text": "Friend",
+			"children": [{
+				"id": 1111,
+				"text": "Friend1"
+			},
+			{
+				"id": 1112,
+				"text": "Friend2"
+			},{
+				"id": 1113,
+				"text": "Friend3"
+			},{
+				"id": 1114,
+				"text": "Friend4"
+			}]
+		},
+		{
+			"id": 112,
+			"text": "Wife"
+		},
+		{
+			"id": 113,
+			"text": "Company"
+		}]
+	},
+	{
+		"id": 12,
+		"state": "closed",
+		"text": "Program Files",
+		"children": [{
+			"id": 121,
+			"text": "Intel"
+		},
+		{
+			"id": 122,
+			"text": "Java",
+			"attributes": {
+				"p1": "Custom Attribute1",
+				"p2": "Custom Attribute2"
+			}
+		},
+		{
+			"id": 123,
+			"text": "Microsoft Office"
+		},
+		{
+			"id": 124,
+			"text": "Games",
+			"checked": true
+		}]
+	},
+	{
+		"id": 13,
+		"text": "index.html"
+	},
+	{
+		"id": 14,
+		"text": "about.html"
+	},
+	{
+		"id": 15,
+		"text": "welcome.html"
+	}]
+}]

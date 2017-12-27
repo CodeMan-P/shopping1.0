@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Pragma" content="no-cache">   
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>tree</title>
+<link rel="stylesheet" type="text/css" href="css/easyui.css">
+<link rel="stylesheet" type="text/css"  href="css/icon.css">
+<link rel="stylesheet" type="text/css"  href="css/demo.css">
+
+
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="js/jquery.datagrid.js"></script>
+<script type="text/javascript" src="js/jquery.edatagrid.js"></script>
+	<style>
+		#maintitle{
+			letter-spacing: 8px;
+			font-family: "华文行楷";
+		};
+	</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+//		var d = $("div.easyui-layout");
+//		alert( d.css("width"));
+//		alert( d.css("height"));
+		var s = "欢迎使用超级无敌酷炫拽商城购物后台管理系统";
+		var temp = $("#north");
+		for(var i=0;i<s.length;i++){
+			temp.append("<span id='maintitle' style='position:relative'>"+s[i]+"</span>");
+		}
+		
+function getRandomColor()
+{
+var c = '#';
+var cArray = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+for(var i = 0; i < 6;i++)
+{
+var cIndex = Math.round(Math.random()*15);
+c += cArray[cIndex];
+}
+return c;
+} 
+		var TOP=-4;
+	function changeColor(){
+		var spans = $("span[id=maintitle]")
+		$.each(spans,function(i,obj){
+			var a = Math.round(Math.random()*250);
+			var b = Math.round(Math.random()*250);
+			var c = Math.round(Math.random()*250);
+			var rgb = "rgb("+a+","+b+","+c+")";
+			$(obj).css("color",rgb);
+			$(obj).css("top","0px");
+			$(obj).css("top",TOP+"px");
+			$(obj).css("left","0px");
+			$(obj).css("left",TOP+"px");
+			
+			if(TOP==4){
+			   TOP=-4;
+			   }else{
+			TOP+=2;
+			   }
+});
+	};
+		
+		setInterval(changeColor,200);
+$('#center').tabs('add',{   
+    title:'New Tab',   
+    content:'Tab Body',   
+    closable:true,   
+    tools:[{   
+        iconCls:'icon-reload',   
+        handler:function(){   
+            alert('refresh');   
+        }   
+    }]   
+}); 
+	$('#DataTree').tree({
+	onDblClick: function(node){
+		var s = node.id+"";
+		var par = $('#DataTree').tree("getParent",node.target);
+		if(par.text==="DataGrid"){	
+					$('#center').tabs('add',{   
+						title:node.text,
+						id:node.text+"_tab",
+//						content:"<table class=\"easyui-datagrid\" data-options=\"url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true\"><thead><tr><th data-options=\"field:'status',align:'center'\" width=\"50\">Status</th></tr></thead></table>",   
+						
+						closable:true,   
+						tools:[{   
+							iconCls:'icon-reload',   
+							handler:function(){   
+								alert('refresh');   
+							}   
+						}]   
+					}); 
+		   };
+//		var temp = $("#"+node.text+"_tab").attr("id");
+//		alert(temp);
+	}
+});
+
+
+
+		//$('.easyui-layout').layout('collapse','west'); 
+	
+		//$('#main').load('subTabs.html');
+	});
+	
+	</script>
+</head>
+
+<body>
+
+	<div class="easyui-layout" style="width:100%;height:inherit;position: absolute;top: 0px;margin:2px 0;bottom: 0px;overflow:hidden;">    
+		<div data-options="region:'north'" id="north" style="height:50px;text-align: center;padding:5px;font-size: 26px">
+		
+		</div>
+		<div data-options="region:'south',split:true" style="height:50px;"></div>
+		<div data-options="region:'east',split:true,collapsed:false" title="East" style="width:85px;">
+			<a id="btn" href="javascript:alert('search');void(0);" class="easyui-linkbutton" style="" data-options="iconCls:'icon-search'">easyui</a> 
+			<a id="btn1" href="#" class="easyui-linkbutton" style="" data-options="iconCls:'icon-edit'">easyui</a> 
+			<a id="btn2" href="#" class="easyui-linkbutton" style="" data-options="iconCls:'icon-save'">easyui</a> 
+			<a id="btn3" href="#" class="easyui-linkbutton" style="" data-options="iconCls:'icon-remove'">easyui</a> 
+			<a id="btn4" href="#" class="easyui-linkbutton" style="" data-options="iconCls:'icon-cancel'">easyui</a> 
+			<a id="btn5" href="#" class="easyui-linkbutton" style="" data-options="iconCls:'icon-lock'">easyui</a> 
+		</div>
+		<div data-options="region:'west',split:true" id="west" title="West" style="width:200px;">
+			<div class="easyui-accordion" data-options="fit:true,border:false">
+				<div title="DataGrid"  style="selected:true,padding:10px;">
+					<ul class="easyui-tree" id="DataTree" data-options="url:'tree_data2.json',method:'get',animate:true,dnd:true,lines:true"></ul>
+				</div>
+				<div title="Title2" data-options="" style="padding:10px;">
+					<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,dnd:true"></ul>
+				</div>
+				<div title="Title3" style="padding:10px">
+					<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,dnd:true"></ul>
+				</div>
+			</div>
+		</div>
+		
+			<div class="easyui-tabs" id="center" data-options="region:'center',fit:true,border:true,plain:false">
+		
+				<div title="Main" id="main" class="easyui-tabs" data-options="fit:true,border:false,plain:true" style="padding:1px">
+							<div title="sub1" data-options="href:'_content.html',closable:true" style="padding:10px"></div>
+							<div title="sub2" data-options="href:'_content.html',closable:true" style="padding:10px"></div>
+							<div title="DataGrid" style="padding:5px" data-options="closable:true">
+							<table class="easyui-datagrid"
+							data-options="url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
+							<thead>
+							<tr>
+							<th data-options="field:'itemid'" width="80">Item ID</th>
+							<th data-options="field:'productid'" width="100">Product ID</th>
+							<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+							<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+							<th data-options="field:'attr1'" width="150">Attribute</th>
+							<th data-options="field:'status',align:'center'" width="50">Status</th>
+							</tr>
+							</thead>
+							</table>
+							</div>
+			
+				
+				</div>
+				<div title="About" data-options="href:'_content.html',closable:true" style="padding:10px"></div>
+				<div title="DataGrid" style="padding:5px" data-options="closable:true">
+					<table class="easyui-datagrid"
+							data-options="url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
+						<thead>
+							<tr>
+								<th data-options="field:'itemid'" width="80">Item ID</th>
+								<th data-options="field:'productid'" width="100">Product ID</th>
+								<th data-options="field:'listprice',align:'right'" width="80">List Price</th>
+								<th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
+								<th data-options="field:'attr1'" width="150">Attribute</th>
+								<th data-options="field:'status',align:'center'" width="50">Status</th>
+							</tr>
+						</thead>
+					</table>
+				</div>	
+			</div>
+		<!-- 
+		<div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
+		</div>
+-->
+
+	</div>
+</body>
+</html>

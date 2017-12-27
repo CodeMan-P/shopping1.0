@@ -1,0 +1,127 @@
+[{
+	"id": 1,
+	"text": "数据分析",
+	"children": [{
+		"id": 11,
+		"text": "用户分析",
+		"children": [{
+			"id": 111,
+			"text": "注册地分布",
+			"iconCls": "icon-chart_sub"
+		},
+		{
+			"id": 112,
+			"text": "性别年龄分布",
+			"iconCls": "icon-chart_sub"
+		},
+		{
+			"id": 113,
+			"text": "注册日期分布",
+			"state": "closed",
+			"children": [{
+				"id": 1131,
+				"text": 2017,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1132,
+				"text": 2016,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1133,
+				"text": 2015,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1134,
+				"text": 2014,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1135,
+				"text": 2013,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1136,
+				"text": 2012,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1137,
+				"text": 2011,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1138,
+				"text": 2010,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1139,
+				"text": 2009,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1140,
+				"text": 2008,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1141,
+				"text": 2007,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1142,
+				"text": 2006,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1143,
+				"text": 2005,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1144,
+				"text": 2004,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1145,
+				"text": 2003,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1146,
+				"text": 2002,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1147,
+				"text": 2001,
+				"iconCls": "icon-chart_sub"
+			},
+			{
+				"id": 1148,
+				"text": 2000,
+				"iconCls": "icon-chart_sub"
+			}]
+		
+		},{
+			"id": 115,
+			"text": "词云分析",
+			"state": "closed",
+			"children": [{
+				"id": 1151,
+				"text": "常见姓",
+			    "iconCls": "icon-chart_sub"
+			},{
+			    "id": 1152,
+				"text": "常见名",
+			    "iconCls": "icon-chart_sub"
+			}]
+		}]
+	}]
+}]
