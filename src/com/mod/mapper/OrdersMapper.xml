@@ -119,12 +119,18 @@
 		</collection>
 	</resultMap>
 
-	<select flushCache="true" id="getOGViewGoupByOid" parameterType="java.lang.Integer" resultMap="ogViewGoupByOid">
+	<!-- <select flushCache="true" id="getOGViewGoupByOid" parameterType="java.lang.Integer" resultMap="ogViewGoupByOid">
 		select oid,state,address,sum,uid 
 		from view_order_goods 
 		where uid = #{uid,jdbcType=INTEGER} group by oid
-	</select>
+	</select> -->
 
+	<select flushCache="true" id="getOGViewGoupByOid" parameterType="java.lang.Integer" resultMap="ogViewGoupByOid">
+		select oid,state,address,sum,uid 
+		from orders
+		where uid = #{uid,jdbcType=INTEGER}
+	</select>
+	
 	<select id="getOGViewSub" parameterType="java.util.HashMap" resultMap="subView">
 		select gid,gname,tid,gnum,subtotal,price,imgPath,descption 
 		from view_order_goods 

@@ -46,7 +46,11 @@ public class GoodsTypeDao{
 	}
 
 	public  int deleByObj(GoodsType t) throws Exception {
-		log.warn("此类未设置deleByObj方法！");
+		int i = 0;
+		i = gtm.deleteByPrimaryKey(t.getTid());;
+		if(i==1){
+			return i;
+		}
 		return 0;
 	}
 
