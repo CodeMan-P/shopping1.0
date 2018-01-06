@@ -6,6 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
+import org.junit.Test;
 
 public class JsonFileToStr {
 	public static synchronized String getJson(String path) {
@@ -50,6 +53,14 @@ public class JsonFileToStr {
 		String json = sbf.toString();
 		return json;
 	}
+	@Test
+	public void testM(){
+		String c = File.separator;
+		String path = System.getProperty("user.dir");
+		String realPath = path+c+"json"+c+"json"+c+"order_list.json";		
+		System.out.println(realPath);
+		System.out.println(getJson(new File(realPath)));
+	}
 	public static synchronized String getJson(File file) {
 		FileInputStream fis = null;
 		try {
@@ -58,7 +69,10 @@ public class JsonFileToStr {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		InputStreamReader isr = new InputStreamReader(fis);
+		InputStreamReader isr = null;
+		
+			isr = new InputStreamReader(fis);
+	
 		BufferedReader bfr = new BufferedReader(isr);
 		char c[] = new char[100];
 		int i = 0;

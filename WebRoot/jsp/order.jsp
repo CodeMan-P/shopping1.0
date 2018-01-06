@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   for(HashMap<String,Object> item : adlist){
 	  %>
 	  <div  style="float:left;width:300px;height:170px; margin: 10px;bottom: 10px;border: 1px solid #CCCCCC">
-	     <input type="radio" name="radio" id="radio<%=item.get("adressid")%>" value="<%=item.get("address")%>"><%=idindex++%><br/>
+	     <input type="radio" name="radio" id="radio<%=item.get("adressId")%>" value="<%=item.get("address")%>"><%=idindex++%><br/>
 	     <% 
 	     item.remove("uid");
 	     for (String s:item.keySet()){
@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			<br/>
     			<br/>
     			<script type="text/javascript">
-    			$("#radio<%=item.get("adressid")%>").prop("checked",true);
+    			$("#radio<%=item.get("adressId")%>").prop("checked",true);
     			</script>
     			<%
     		}
@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	%>
     	
-    	<%=s.equals("adressid")?"":item.get(s)%><br/>
+    	<%=s.equals("adressId")?"":item.get(s)%><br/>
     	
   		 <% }}%>
 		</div>

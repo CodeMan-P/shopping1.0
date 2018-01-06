@@ -104,10 +104,10 @@ $("input").bind('keyup',function () {
 	   
    
   for(HashMap<String,Object> item : adlist){
-	  %><div name= "<%=item.get("adressid")%>" style="float:left;height:170px;width:31%; margin: 10px;border: 1px solid #CCCCCC">
-	     <input type="radio" name="radio" id="radio<%=item.get("adressid")%>" value="<%=item.get("address")%>"><%=idindex%><br/>
-	     <input id="editb" type="button" name="<%=item.get("adressid")%>" value="修改"  />
-	     <input id="deleb" type="button" value="删除" onclick="deleA(<%=item.get("adressid")%>)" /><br/>
+	  %><div name= "<%=item.get("adressId")%>" style="float:left;height:170px;width:31%; margin: 10px;border: 1px solid #CCCCCC">
+	     <input type="radio" name="radio" id="radio<%=item.get("adressId")%>" value="<%=item.get("address")%>"><%=idindex%><br/>
+	     <input id="editb" type="button" name="<%=item.get("adressId")%>" value="修改"  />
+	     <input id="deleb" type="button" value="删除" onclick="deleA(<%=item.get("adressId")%>)" /><br/>
 	     <% 
 	     item.remove("uid");
 	     if(!item.isEmpty()){
@@ -123,7 +123,7 @@ $("input").bind('keyup',function () {
     			<br/>
     			<br/>
     			<script type="text/javascript">
-    			$("#radio<%=item.get("adressid")%>").prop("checked",true);
+    			$("#radio<%=item.get("adressId")%>").prop("checked",true);
     			</script>
     			<%
     		}
@@ -132,7 +132,7 @@ $("input").bind('keyup',function () {
     	%>
     	
     	<span name = <%=s %>>
-    	<%=s.equals("adressid")?"":item.get(s)%>
+    	<%=s.equals("adressId")?"":item.get(s)%>
     	</span><br/>
     	
   		 <% }}}%>
