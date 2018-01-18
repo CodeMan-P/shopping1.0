@@ -4,9 +4,9 @@
 <classPathEntry  location="D:\MyEclipse\Workspaces\onlineShopping2\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.6.jar"/>   
   <context id="context1">
     <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/shop?characterEncoding=UTF-8" driverClass="com.mysql.jdbc.Driver" password="mysql" userId="root" />
-    <javaModelGenerator targetPackage="com.mod.bean" targetProject="onlineShopping2" />
-    <sqlMapGenerator targetPackage="com.mod.mapper" targetProject="onlineShopping2" />
-    <javaClientGenerator targetPackage="com.mod.mapper" targetProject="onlineShopping2" type="XMLMAPPER" />
+    <javaModelGenerator targetPackage="com.mod.bean" targetProject="shopping1.0" />
+    <sqlMapGenerator targetPackage="com.mod.mapper" targetProject="shopping1.0" />
+    <javaClientGenerator targetPackage="com.mod.mapper" targetProject="shopping1.0" type="XMLMAPPER" />
 		<table tableName="goods" domainObjectName="Goods"
 	 enableCountByExample="false" enableSelectByExample="false"
             enableUpdateByExample="false" enableDeleteByExample="false"

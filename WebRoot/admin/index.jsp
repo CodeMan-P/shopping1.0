@@ -463,7 +463,7 @@
 		intonly : {
 			validator : function(value) {
 				var c = $(this).val();
-				if (/\D/g.test(c)) {
+				if ('/\D/g'.test(c)) {
 
 					$(this).val(c.replace(/\D/g, ''));
 
